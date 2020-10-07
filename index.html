@@ -49,10 +49,11 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
         margin-bottom: 2rem;
       }
 
-      #myTaskList {
+      .task-list {
         margin-top: 2rem;
         background-color: #f9f9f9;
         list-style: none;
+        margin-bottom: 2rem;
       }
 
       .task-list-item {
@@ -81,7 +82,7 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
         margin: 2rem 0;
       }
 
-      .top-controls {
+      .controls {
         text-align: center;
       }
     </style>
@@ -95,7 +96,7 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
       new task"
     </p>
 
-    <div class="top-controls">
+    <div class="controls">
       <input
         type="text"
         placeholder="Type new task..."
@@ -122,17 +123,13 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
       />
     </div>
 
-    <hr />
-
     <!-- EXERCISE 4
         Create a button "Remove First Task" to trigger the method "removeFirst"
         -->
 
-    <ul id="myTaskList"></ul>
+    <ul id="myTaskList" class="task-list"></ul>
 
-    <hr />
-
-    <div class="top-controls">
+    <div class="controls">
       <input
         type="color"
         placeholder="Color"
