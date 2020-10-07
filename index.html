@@ -22,85 +22,135 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
     />
     <title>Task List</title>
     <style>
-      /* EXERCISE 2:  
-       Create a CSS class for the task list with a diverse background
-       Create a CSS class for the task list item with a border, a bold text and a bigger font size
-       Style every button of the page to be bigger
-       
-    */
+      /* EXERCISE 2:
+         Create a CSS class for the task list with a diverse background
+         Create a CSS class for the task list item with a border, a bold text and a bigger font size
+         Style every button of the page to be bigger
+
+      */
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        max-width: 980px;
+        margin: 1rem auto 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      .subtitle {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
       #myTaskList {
-        background-color: crimson;
+        margin-top: 2rem;
+        background-color: #f9f9f9;
+        list-style: none;
       }
 
       .task-list-item {
-        border: solid 1px;
         font-weight: bold;
         font-size: 1.5rem;
+        padding: 0.5rem;
+        border-bottom: 1px solid;
+      }
+
+      input {
+        border-radius: 0.25rem;
       }
 
       input[type="button"] {
         padding: 0.5rem;
+        background-color: darkorange;
+        border: none;
+      }
+
+      #newTask {
+        width: calc(100% - 500px);
+        padding: 0.5rem;
+      }
+
+      hr {
+        margin: 2rem 0;
+      }
+
+      .top-controls {
+        text-align: center;
       }
     </style>
   </head>
   <body>
     <h1>Welcome to your personal Task List!</h1>
-    <br />
 
-    <span
-      >You can add any task you like by writing it
+    <p class="subtitle">
+      You can add any task you like by writing it
       in the specified field and then press "Add
-      new task"</span
-    ><br /><br />
+      new task"
+    </p>
 
-    <input type="text" id="newTask" />
-    <input
-      type="button"
-      value="Add new Task"
-      onclick="addNewTask()"
-    />
+    <div class="top-controls">
+      <input
+        type="text"
+        placeholder="Type new task..."
+        id="newTask"
+      />
+      <input
+        type="button"
+        value="Add new Task"
+        onclick="addNewTask()"
+      />
 
-    <!-- EXERCISE 3
-        Create a button "Remove Last Task" to trigger the method "removeLast"
-        -->
-    <input
-      type="button"
-      onclick="removeLast()"
-      value="Remove Last Task"
-    />
+      <!-- EXERCISE 3
+            Create a button "Remove Last Task" to trigger the method "removeLast"
+            -->
+      <input
+        type="button"
+        onclick="removeLast()"
+        value="Remove Last Task"
+      />
+      <input
+        type="button"
+        onclick="removeFirst()"
+        value="Remove First Task"
+      />
+    </div>
+
+    <hr />
 
     <!-- EXERCISE 4
         Create a button "Remove First Task" to trigger the method "removeFirst"
         -->
 
-    <input
-      type="button"
-      onclick="removeFirst()"
-      value="Remove First Task"
-    />
-
     <ul id="myTaskList"></ul>
 
     <hr />
 
-    <input
-      type="color"
-      placeholder="Color"
-      id="colorPicker"
-    />
-    <input
-      type="button"
-      value="Change task background"
-      onclick="changeTaskBackgroundColor()"
-    />
+    <div class="top-controls">
+      <input
+        type="color"
+        placeholder="Color"
+        id="colorPicker"
+        value="#92ff8a"
+      />
+      <input
+        type="button"
+        value="Change task background"
+        onclick="changeTaskBackgroundColor()"
+      />
 
-    <hr />
-
-    <input
-      type="button"
-      value="Sort"
-      onclick="bubblesort()"
-    />
+      <input
+        type="button"
+        value="Bubble Sort"
+        onclick="bubbleSort()"
+      />
+    </div>
 
     <script>
       /* EXERCISE 5: 
@@ -129,6 +179,8 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
         el.classList.add("task-list-item");
 
         list.appendChild(el);
+
+        task.value = "";
       }
 
       /* EXERCISE 6: 
@@ -201,6 +253,41 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
                - Break the code into many function for semplicity 
                - Reuse the functions previously created
             */
+
+      function bubbleSort() {
+        const arr = getTasksAsArray();
+
+        if (arr.length === 0) return;
+
+        let swapped;
+        do {
+          swapped = false;
+          for (let i = 0; i < arr.length; i++) {
+            if (arr[i] > arr[i + 1]) {
+              let tmp = arr[i];
+              arr[i] = arr[i + 1];
+              arr[i + 1] = tmp;
+              swapped = true;
+            }
+          }
+        } while (swapped);
+
+        const listEl = document.querySelector(
+          "#myTaskList"
+        );
+
+        listEl.innerText = "";
+
+        for (const task of arr) {
+          const el = document.createElement("li");
+
+          el.innerText = task;
+
+          el.classList.add("task-list-item");
+
+          listEl.appendChild(el);
+        }
+      }
     </script>
   </body>
 </html>
