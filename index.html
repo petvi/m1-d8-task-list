@@ -63,13 +63,21 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
     <!-- EXERCISE 3
         Create a button "Remove Last Task" to trigger the method "removeLast"
         -->
-    <input type="button" onclick="removeLast()" value="Remove Last Task"></input>
+    <input
+      type="button"
+      onclick="removeLast()"
+      value="Remove Last Task"
+    />
 
     <!-- EXERCISE 4
         Create a button "Remove First Task" to trigger the method "removeFirst"
         -->
 
-        <input type="button" onclick="removeFirst()" value="Remove First Task"></input>
+    <input
+      type="button"
+      onclick="removeFirst()"
+      value="Remove First Task"
+    />
 
     <ul id="myTaskList"></ul>
 
@@ -103,22 +111,84 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
                 - Append the child to the UL
             */
 
+      function addNewTask() {
+        const task = document.querySelector(
+          "#newTask"
+        );
+
+        if (!task.value) return;
+
+        const list = document.querySelector(
+          "#myTaskList"
+        );
+
+        const el = document.createElement("li");
+
+        el.innerText = task.value;
+
+        el.classList.add("task-list-item");
+
+        list.appendChild(el);
+      }
+
       /* EXERCISE 6: 
                 Create a method "removeLast" which removes the last item from the task list
             */
+
+      function removeLast() {
+        const list = document.querySelector(
+          "#myTaskList"
+        );
+
+        list.lastChild.remove();
+      }
 
       /* EXERCISE 7: 
                 Create a method "removeFirst" which removes the first item from the task list
             */
 
+      function removeFirst() {
+        const list = document.querySelector(
+          "#myTaskList"
+        );
+
+        list.firstChild.remove();
+      }
+
       /* EXERCISE 8: 
                Create a method "getTasksAsArray" which returns (and print to the console) an array containing the tasks as string
             */
+
+      function getTasksAsArray() {
+        const list = document.querySelector(
+          "#myTaskList"
+        );
+
+        const arr = [];
+
+        for (const task of list.children) {
+          arr.push(task.innerText);
+        }
+
+        return arr;
+      }
 
       /* EXERCISE 9:
                Create a method "changeTaskBackgroundColor" which takes the color from the color picker with an 
                onchange event listener ad applies it as background to every list item
             */
+
+      function changeTaskBackgroundColor() {
+        const color = document.querySelector(
+          "#colorPicker"
+        );
+
+        const list = document.querySelector(
+          "#myTaskList"
+        );
+
+        list.style.backgroundColor = color.value;
+      }
 
       /* EXTRA */
 
